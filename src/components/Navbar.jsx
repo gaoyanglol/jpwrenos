@@ -30,16 +30,16 @@ const Navbar = () => {
 
             <ul className={`absolute animate-fade-in top-0 -z-10 pt-20 w-full h-screen flex-col gap-6 items-center bg-neutral-800 *:text-lg *:font-light *:text-white *:transition-all *:duration-300 *:ease-ease ${openMenu ? 'flex' : 'hidden'}`}>
                 <li className=" hover:text-secondary ">
-                    <a href="/" className="inline-block leading-10">HOME</a>
+                    <a href="/" onClick={handleOpenMenu} className="inline-block leading-10">HOME</a>
                 </li>
                 <li className=" hover:text-secondary ">
-                    <a href="#services" className="inline-block leading-10">SERVICES</a>
+                    <a href="#services" onClick={handleOpenMenu} className="inline-block leading-10">SERVICES</a>
                 </li>
                 <li className=" hover:text-secondary ">
-                    <a href="#projects" className="inline-block leading-10">PROJECTS</a>
+                    <a href="#projects" onClick={handleOpenMenu} className="inline-block leading-10">PROJECTS</a>
                 </li>
                 <li className=" hover:text-secondary ">
-                    <a href="#contact" className="inline-block leading-10">CONTACT</a>
+                    <a href="#contact" onClick={handleOpenMenu} className="inline-block leading-10">CONTACT</a>
                 </li>
             </ul>
 
