@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="py-10 md:px-0 lg:px-14 bg-neutral-800">
+        <footer id="contact" className="py-10 md:px-0 lg:px-14 bg-neutral-800">
             <div className="flex flex-col sm:flex-row">
                 <div className="sm:ml-6 basis-1/2 flex justify-center sm:justify-start">
                     <div className="flex flex-col gap-8 text-center sm:text-left justify-start text-primary">
@@ -21,7 +21,7 @@ const Footer = () => {
                                     <g><path d="M180 149.032H20V50.968h160v98.064zm-154.839-5.161h149.677V56.129H25.161v87.742z" fill="#9A8A78" data-color="1"></path><path fill="#9A8A78" d="M100 118.79L20.968 55.565l3.226-4.033L100 112.177l75.806-60.645 3.226 4.033L100 118.79z" data-color="1"></path></g>
                                 </svg>
                             </div>
-                            <a href="mailto:info@mysite.com">justpaintworks@hotmail.com</a>
+                            <a href="mailto:justpaintworks@hotmail.com">justpaintworks@hotmail.com</a>
                         </div>
                         <div className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center font-light">
                             <div className="flex justify-center w-16">
@@ -38,16 +38,16 @@ const Footer = () => {
                         <h1 className="font-logo text-2xl text-primary">JPW</h1>
                         <ul className="flex flex-col *:leading-8 *:text-center *:sm:text-left *:text-sm *:font-light *:transition-all *:duration-300 *:ease-ease">
                             <li className=" hover:text-secondary ">
-                                <Link to="/" className="inline-block">Home</Link>
+                                <a href="/" className="inline-block">Home</a>
                             </li>
                             <li className=" hover:text-secondary ">
-                                <Link to="/services" className="inline-block">Services</Link>
+                                <a href="#services" className="inline-block">Services</a>
                             </li>
                             <li className=" hover:text-secondary ">
-                                <Link to="/projects" className="inline-block">Projects</Link>
+                                <a href="#projects" className="inline-block">Projects</a>
                             </li>
                             <li className=" hover:text-secondary ">
-                                <Link to="/contact" className="inline-block">Contact</Link>
+                                <a href="#contact" className="inline-block">Contact</a>
                             </li>
                         </ul>
                         <a  href="tel:(705) 521-2300"
