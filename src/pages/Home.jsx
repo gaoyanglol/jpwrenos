@@ -21,8 +21,8 @@ const Home = () => {
         <main>
             {/* Banner Section */}
             <div className="h-[535px] md:h-[737px] lg:h-[939px] relative">
-                <div id="bannerBg" className="h-full w-full absolute bg-[url(./images/banner_bg.webp)] bg-cover bg-center"></div>
-                <div className="h-full w-full pt-28 md:pt-0 absolute flex flex-col justify-center gap-4 bg-neutral-800/60 will-change-transform">
+                <div id="bannerBg" className="h-full w-full absolute bg-[url(./images/banner_bg.webp)] bg-cover bg-center will-change-transform"></div>
+                <div className="h-full w-full pt-28 md:pt-0 absolute flex flex-col justify-center gap-4 bg-neutral-800/60">
                     <h1 className="font-logo 2xl:text-6xl lg:text-5xl text-4xl text-center text-white">JPW</h1>
                     <h2 className="font-medium 2xl:text-4xl lg:text-3xl text-2xl text-center text-white">General Home Renovation</h2>
                     <p className="px-4 sm:px-0 font-extralight 2xl:text-3xl lg:text-2xl text-xl text-center text-white">Transforming Spaces, Exceeding Expectations</p>
