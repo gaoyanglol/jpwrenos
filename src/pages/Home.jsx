@@ -1,15 +1,62 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ImageFullScreen from "../components/ImageFullScreen";
+
+import bannerSrc from '../images/banner_bg.webp';
+import workers1 from '../images/main_workers_1.avif';
+import workers2 from '../images/main_workers_2.avif';
+import demo1 from '../images/projects_demo1.webp';
+import demo2 from '../images/projects_demo2.webp';
+import demo3 from '../images/projects_demo3.webp';
+import demo4 from '../images/projects_demo4.webp';
+import demo5 from '../images/projects_demo5.webp';
 
 const Home = () => {
-    useEffect(() => {
-        const parallaxScroll = () => {
-            const bannerBg = document.getElementById('bannerBg');
-            const scrollValue = window.scrollY;
-            if (scrollValue <= 1000) {
-                bannerBg.style.transform = `translateY(${scrollValue * 0.2}px)`;
-            }
+    const [clickSrc, setClickSrc] = useState('');
+    const [isFullScreen, setIsFullScreen] = useState(false);
+
+    const optimizedLazyLoad = () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const placeholder = el.getAttribute('data-placeholder');
+                    const raw = el.getAttribute('data-src');
+
+                    // el.style.backgroundImage = `url(${placeholder})`;
+                    // el.style.filter = 'blur(15px)';
+
+                    const img = new Image();
+                    img.src = raw;
+
+                    img.onload = () => {
+                        el.style.backgroundImage= `url(${raw})`;
+                        el.style.filter = 'blur(0)';
+                    };
+
+                    observer.unobserve(el);
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.5
+        });
+
+        document.querySelectorAll('.image-container').forEach(el => {
+            observer.observe(el);
+        })
+    }
+
+    const parallaxScroll = () => {
+        const bannerBg = document.getElementById('bannerBg');
+        const scrollValue = window.scrollY;
+        if (scrollValue <= 1000) {
+            bannerBg.style.transform = `translateY(${scrollValue * 0.2}px)`;
         }
+    }
+
+    useEffect(() => {
         window.addEventListener('scroll', parallaxScroll);
+        optimizedLazyLoad();
 
         return () => {
             window.removeEventListener('scroll', parallaxScroll);
@@ -17,11 +64,20 @@ const Home = () => {
         
     }, []);
 
+    const handleZoomImg = (src) => {
+        setClickSrc(src);
+        toggleFullScreen();
+    }
+
+    const toggleFullScreen = () => {
+        setIsFullScreen(!isFullScreen);
+    }
+
     return (
         <main>
             {/* Banner Section */}
             <div className="h-[535px] md:h-[737px] lg:h-[939px] relative">
-                <div id="bannerBg" className="h-full w-full absolute bg-[url(./images/banner_bg.webp)] bg-cover bg-center will-change-transform"></div>
+                <div id="bannerBg" data-src={bannerSrc} className="image-container h-full w-full absolute bg-[url(./images/banner_bg_low.webp)] bg-cover bg-center will-change-transform"></div>
                 <div className="h-full w-full pt-28 md:pt-0 absolute flex flex-col justify-center gap-4 bg-neutral-800/60">
                     <h1 className="font-logo 2xl:text-6xl lg:text-5xl text-4xl text-center text-white">JPW</h1>
                     <h2 className="font-medium 2xl:text-4xl lg:text-3xl text-2xl text-center text-white">General Home Renovation</h2>
@@ -34,7 +90,9 @@ const Home = () => {
                     {/* Our Service Section */}
                     <div id="services" className="bg-primary">
                         <div className="h-[700px] md:h-[500px] lg:h-[500px] xl:h-[700px] flex flex-col-reverse md:flex-row gap-px lg:mx-px">
-                            <div className="basis-1/2 md:my-px bg-[url(./images/main_workers_1.avif)] bg-cover bg-center"></div>
+                            <div className="basis-1/2 md:my-px overflow-hidden">
+                                <div data-src={workers1} className="image-container w-full h-full bg-[url(./images/main_workers_1_low.webp)] bg-cover bg-center"></div>
+                            </div>
                             <div className="basis-1/2 mt-px md:my-px bg-neutral-800 flex flex-col gap-4 lg:gap-7 justify-center items-start *:ml-[15%] lg:*:ml-[25%]">
                                 <h3 className="font-medium 2xl:text-[40px] lg:text-3xl md:text-2xl text-2xl text-white">Our Services</h3>
                                 <ul className="list-disc text-white">
@@ -124,15 +182,17 @@ const Home = () => {
 
                     {/* About Us Section */}
                     <div className="bg-primary">
-                        <div className="h-[700px] md:h-[500px] lg:h-[500px] xl:h-[651px] flex flex-col-reverse md:flex-row gap-px lg:mx-px">
+                        <div className="h-[800px] md:h-[500px] lg:h-[500px] xl:h-[651px] flex flex-col-reverse md:flex-row gap-px lg:mx-px">
                             <div className="basis-1/2 mb-px bg-neutral-800 flex justify-center items-center ">
-                                <div className="flex flex-col gap-4 md:gap-6 mx-8 md:mx-10 lg:mx-16 xl:mx-20 2xl:mx-24 text-white font-extralight">
+                                <div className="flex flex-col gap-4 md:gap-6 mx-8 my-6 md:mx-10 lg:mx-12 xl:mx-20 2xl:mx-24 text-white font-extralight">
                                     <h3 className="font-medium 2xl:text-[40px] lg:text-3xl md:text-2xl text-2xl">About Us</h3>
                                     <h4 className="font-medium 2xl:text-[30px] lg:text-2xl md:text-xl text-xl text-primary">JWP General Home Renovation</h4>
-                                    <p>I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. I’m a great place for you to tell a story and let your users know a little more about you.</p>
+                                    <p>For over 8 years, we’ve been dedicated to transforming houses into dream homes with quality craftsmanship and attention to detail. From modern kitchen upgrades to timeless bathroom designs and full-scale remodels, we specialize in creating spaces that are both functional and beautiful. Our team is committed to providing personalized service, innovative solutions, and exceptional results that enhance your home’s value and appeal. At JWP, every project is an opportunity to bring your vision to life and help you love where you live. Let’s build something extraordinary together!</p>
                                 </div>
                             </div>
-                            <div className="basis-1/2 md:mb-px bg-[url(./images/main_workers_2.avif)] bg-cover bg-center"></div>
+                            <div className="basis-1/2 md:mb-px overflow-hidden">
+                                <div data-src={workers2} className="image-container w-full h-full bg-[url(./images/main_workers_2_low.webp)] bg-cover bg-center"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -143,26 +203,26 @@ const Home = () => {
 
                             <div className="basis-[62%] md:basis-[38%] flex gap-0.5 *:gap-0.5 lg:*:gap-[40px] 2xl:*:gap-[60px]">
                                 <div className="basis-1/2 flex flex-col lg:*:border lg:*:border-primary">
-                                    <div className="basis-[65%] *:relative *:hover:before:absolute *:before:w-full *:before:h-full *:before:bg-secondary *:before:opacity-30">
-                                        <a className="block w-full h-full bg-[url(./images/projects_demo1.webp)] bg-cover bg-center hover:cursor-pointer"></a>
+                                    <div className="basis-[65%] gallery-images">
+                                        <a data-src={demo1} onClick={() => handleZoomImg(demo1)} className="image-container bg-[url(./images/projects_demo1_low.webp)]"></a>
                                     </div>
-                                    <div className="basis-[35%] *:relative *:hover:before:absolute *:before:w-full *:before:h-full *:before:bg-secondary *:before:opacity-30">
-                                        <a className="block w-full h-full bg-[url(./images/projects_demo2.webp)] bg-cover bg-center hover:cursor-pointer"></a>
+                                    <div className="basis-[35%] gallery-images">
+                                        <a data-src={demo2} onClick={() => handleZoomImg(demo2)} className="image-container bg-[url(./images/projects_demo2_low.webp)]"></a>
                                     </div>
                                 </div>
 
                                 <div className="basis-1/2 flex flex-col lg:*:border lg:*:border-primary">
-                                    <div className="basis-[45%] *:relative *:hover:before:absolute *:before:w-full *:before:h-full *:before:bg-secondary *:before:opacity-30">
-                                        <a className="block w-full h-full bg-[url(./images/projects_demo3.webp)] bg-cover bg-center hover:cursor-pointer"></a>
+                                    <div className="basis-[45%] gallery-images">
+                                        <a data-src={demo3} onClick={() => handleZoomImg(demo3)} className="image-container bg-[url(./images/projects_demo3_low.webp)]"></a>
                                     </div>
-                                    <div className="basis-[55%] *:relative *:hover:before:absolute *:before:w-full *:before:h-full *:before:bg-secondary *:before:opacity-30">
-                                        <a className="block w-full h-full bg-[url(./images/projects_demo4.webp)] bg-cover bg-center hover:cursor-pointer"></a>
+                                    <div className="basis-[55%] gallery-images">
+                                        <a data-src={demo4} onClick={() => handleZoomImg(demo4)} className="image-container bg-[url(./images/projects_demo4_low.webp)]"></a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="basis-[38%] md:basis-[62%] lg:border lg:border-primary *:relative *:hover:before:absolute *:before:w-full *:before:h-full *:before:bg-secondary *:before:opacity-30">
-                                <a className="block w-full h-full bg-[url(./images/projects_demo5.webp)] bg-cover bg-center hover:cursor-pointer"></a>
+                            <div className="basis-[38%] md:basis-[62%] lg:border lg:border-primary gallery-images">
+                                <a data-src={demo5} onClick={() => handleZoomImg(demo5)} className="image-container bg-[url(./images/projects_demo5_low.webp)]"></a>
                             </div>
 
                         </div>
@@ -170,7 +230,7 @@ const Home = () => {
 
                 </div>
             </div>
-
+            <ImageFullScreen src={clickSrc} isFullScreen={isFullScreen} toggleFullScreen={toggleFullScreen} />
         </main>
     )
 }
