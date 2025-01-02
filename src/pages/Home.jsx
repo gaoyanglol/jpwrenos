@@ -5,8 +5,11 @@ import bannerSrc from '../images/banner_bg.webp';
 import workers1 from '../images/main_workers_1.avif';
 import workers2 from '../images/main_workers_2.avif';
 import demo1 from '../images/projects_demo1.webp';
+import demo1_zoom from '../images/projects_demo1_zoom.webp';
 import demo2 from '../images/projects_demo2.webp';
+import demo2_zoom from '../images/projects_demo2_zoom.webp';
 import demo3 from '../images/projects_demo3.webp';
+import demo3_zoom from '../images/projects_demo3_zoom.webp';
 import demo4 from '../images/projects_demo4.webp';
 import demo5 from '../images/projects_demo5.webp';
 
@@ -204,16 +207,16 @@ const Home = () => {
                             <div className="basis-[62%] md:basis-[38%] flex gap-0.5 *:gap-0.5 lg:*:gap-[40px] 2xl:*:gap-[60px]">
                                 <div className="basis-1/2 flex flex-col lg:*:border lg:*:border-primary">
                                     <div className="basis-[65%] gallery-images">
-                                        <a data-src={demo1} onClick={() => handleZoomImg(demo1)} className="image-container bg-[url(./images/projects_demo1_low.webp)]"></a>
+                                        <a data-src={demo1} onClick={() => handleZoomImg(demo1_zoom)} className="image-container bg-[url(./images/projects_demo1_low.webp)]"></a>
                                     </div>
                                     <div className="basis-[35%] gallery-images">
-                                        <a data-src={demo2} onClick={() => handleZoomImg(demo2)} className="image-container bg-[url(./images/projects_demo2_low.webp)]"></a>
+                                        <a data-src={demo2} onClick={() => handleZoomImg(demo2_zoom)} className="image-container bg-[url(./images/projects_demo2_low.webp)]"></a>
                                     </div>
                                 </div>
 
                                 <div className="basis-1/2 flex flex-col lg:*:border lg:*:border-primary">
                                     <div className="basis-[45%] gallery-images">
-                                        <a data-src={demo3} onClick={() => handleZoomImg(demo3)} className="image-container bg-[url(./images/projects_demo3_low.webp)]"></a>
+                                        <a data-src={demo3} onClick={() => handleZoomImg(demo3_zoom)} className="image-container bg-[url(./images/projects_demo3_low.webp)]"></a>
                                     </div>
                                     <div className="basis-[55%] gallery-images">
                                         <a data-src={demo4} onClick={() => handleZoomImg(demo4)} className="image-container bg-[url(./images/projects_demo4_low.webp)]"></a>
