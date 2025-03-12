@@ -21,7 +21,7 @@ const Footer = () => {
                                     <g><path d="M180 149.032H20V50.968h160v98.064zm-154.839-5.161h149.677V56.129H25.161v87.742z" fill="#9A8A78" data-color="1"></path><path fill="#9A8A78" d="M100 118.79L20.968 55.565l3.226-4.033L100 112.177l75.806-60.645 3.226 4.033L100 118.79z" data-color="1"></path></g>
                                 </svg>
                             </div>
-                            <a href="mailto:justpaintworks@hotmail.com">justpaintworks@hotmail.com</a>
+                            <a href="mailto:jpwrenos@gmail.com">jpwrenos@gmail.com</a>
                         </div>
                         <div className="flex flex-col gap-2 sm:gap-0 sm:flex-row items-center font-light">
                             <div className="flex justify-center w-16">
